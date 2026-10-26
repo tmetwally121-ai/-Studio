@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>استوديو جروب عملاء البنوك المصرية</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --bg-dark: #050811;
+  --panel-bg: #0d1322;
+  --gold-primary: #d4af37;
+  --gold-light: #fef08a;
+  --text-light: #f8fafc;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+}
+
+body {
+  background: var(--bg-dark);
+  color: var(--text-light);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 10px;
+}
+
+header {
+  text-align: center;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 480px;
+  padding: 0 4px;
+}
+
+.header-logo {
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.header-title {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  text-align: center;
+}
+
+.header-title .line-1 {
+  font-size: 0.95rem;
+  color: var(--gold-light);
+  font-weight: 700;
+  text-align: center;
+  width: 100%;
+}
+
+.header-title .line-2 {
+  font-size: 1.15rem;
+  color: var(--gold-primary);
+  font-weight: 800;
+  text-align: center;
+}
+
+.container {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* إطار الصورة يتناسب مع أبعاد الصورة ولا يقص أطرافها */
+.stage-card {
+  background: #000;
+  border: 2px solid var(--gold-primary);
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1312 / 1199;
+  height: auto;
+  min-height: 0;
+  max-height: 62vh;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.main-avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+  display: none;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.side-audio-waves {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  z-index: 15;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+
+.side-audio-waves.active {
+  opacity: 1;
+}
+
+.wave-bar {
+  width: 20px;
+  height: 4px;
+  background: var(--gold-primary);
+  border-radius: 4px;
+  box-shadow: 0 0 8px var(--gold-primary);
+}
+
+.side-audio-waves.active .wave-bar:nth-child(1) {
+  animation: sidePulse 0.6s infinite ease-in-out alternate;
+}
+
+.side-audio-waves.active .wave-bar:nth-child(2) {
+  animation: sidePulse 0.8s infinite ease-in-out alternate 0.2s;
+}
+
+.side-audio-waves.active .wave-bar:nth-child(3) {
+  animation: sidePulse 0.5s infinite ease-in-out alternate 0.4s;
+}
+
+.side-audio-waves.active .wave-bar:nth-child(4) {
+  animation: sidePulse 0.7s infinite ease-in-out alternate 0.1s;
+}
+
+@keyframes sidePulse {
+  0% {
+    width: 10px;
+    background: var(--gold-primary);
+  }
+  100% {
+    width: 32px;
+    background: #fff;
+  }
+}
+
+.control-card {
+  background: var(--panel-bg);
+  border: 1px solid #1e293b;
+  border-radius: 16px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+label {
+  font-size: 0.82rem;
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+select,
+input[type="range"] {
+  width: 100%;
+  background: #070b14;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 10px;
+  color: #fff;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.sliders-row {
+  display: flex;
+  gap: 10px;
+  background: rgba(0,0,0,0.3);
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(212,175,55,0.2);
+}
+
+.upload-btn-custom {
+  background: rgba(212,175,55,0.1);
+  border: 1px dashed var(--gold-primary);
+  color: var(--gold-light);
+  padding: 10px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 0.82rem;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.thumb-strip-container {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 4px 0;
+  scroll-behavior: smooth;
+}
+
+.thumb-strip-container::-webkit-scrollbar {
+  height: 4px;
+}
+
+.thumb-strip-container::-webkit-scrollbar-thumb {
+  background: var(--gold-primary);
+  border-radius: 4px;
+}
+
+.thumb-item {
+  width: 58px;
+  height: 58px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 2px solid #334155;
+  cursor: pointer;
+  flex-shrink: 0;
+  opacity: 0.6;
+  transition: all 0.2s;
+}
+
+.thumb-item.active {
+  border-color: var(--gold-primary);
+  opacity: 1;
+  box-shadow: 0 0 10px rgba(212,175,55,0.5);
+  transform: scale(1.05);
+}
+
+textarea {
+  width: 100%;
+  background: #070b14;
+  border: 1px solid #334155;
+  border-radius: 10px;
+  padding: 10px;
+  color: #fff;
+  font-size: 0.88rem;
+  outline: none;
+  height: 180px;
+  resize: vertical;
+  line-height: 1.8;
+}
+
+textarea:focus {
+  border-color: var(--gold-primary);
+}
+
+.word-counter {
+  font-size: 0.75rem;
+  color: #94a3b8;
+  text-align: left;
+}
+
+.s
